@@ -123,7 +123,7 @@ class CycloneSteam extends CyclonePlugin {
     });
   }
 
-  static getAchivement(achievementId) {
+  static getAchievement(achievementId) {
     if (!achievementId) {
       console.error('Achievement name not provided.');
       return false;
@@ -137,7 +137,7 @@ class CycloneSteam extends CyclonePlugin {
       return;
     }
 
-    return this.greenworks.getAchivement(achievementId, () => {
+    return this.greenworks.getAchievement(achievementId, () => {
       // #ToDo
     }, () => {
       console.log(`Failed to check achievement: ${ achievementId }`);

@@ -1,6 +1,6 @@
 /*:
  * @target MZ
- * @plugindesc Integrate your game with the Steamworks SDK
+ * @plugindesc Integrate your game with the Steamworks SDK - v1.1
  * <pluginName:CycloneSteam>
  * @author Hudell
  * @url https://makerdevs.com/plugin/cyclone-steam
@@ -141,7 +141,7 @@ class CyclonePatcher {
   }
 
   static patchClass(baseClass, patchFn) {
-    const $super = this.superClasses[baseClass.name] || {};
+    const $super = this.superClasses?.[baseClass.name] || {};
     const $prototype = {};
     const $dynamicSuper = {};
     const patchClass = patchFn($dynamicSuper, $prototype);
@@ -168,7 +168,9 @@ class CyclonePatcher {
       Object.assign($dynamicSuper, $prototype);
     }
 
-    this.superClasses[baseClass.name] = $dynamicSuper;
+    if (this.superClasses) {
+      this.superClasses[baseClass.name] = $dynamicSuper;
+    }
   }
 }
 
@@ -742,7 +744,7 @@ class CycloneSteam extends CyclonePlugin {
     });
   }
 
-  static getAchivement(achievementId) {
+  static getAchievement(achievementId) {
     if (!achievementId) {
       console.error('Achievement name not provided.');
       return false;
@@ -756,7 +758,7 @@ class CycloneSteam extends CyclonePlugin {
       return;
     }
 
-    return this.greenworks.getAchivement(achievementId, () => {
+    return this.greenworks.getAchievement(achievementId, () => {
       // #ToDo
     }, () => {
       console.log(`Failed to check achievement: ${ achievementId }`);
